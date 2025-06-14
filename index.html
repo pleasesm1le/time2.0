@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Обратный отсчёт до 16 июня 2025</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff66b2;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    #countdown {
+      font-size: 2rem;
+      color: #fff;
+      background-color: #1a1a1a;
+      border: 2px solid #ff66b2;
+      padding: 20px 40px;
+      border-radius: 15px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px #ff66b2; }
+      50% { box-shadow: 0 0 20px #ff66b2; }
+    }
+    audio {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 400px;
+      outline: none;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      #countdown { font-size: 1.5rem; padding: 15px 25px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>До 16 июня 2025 года осталось:</h1>
+  <div id="countdown">Загрузка...</div>
+
+  <audio controls autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/07/audio_a8cfd0e010.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
+
+  <script>
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("June 16, 2025 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdown.innerHTML = "Событие наступило!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
