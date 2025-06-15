@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Обратный отсчёт с музыкой</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -45,39 +45,6 @@
     }
     #musicControls {
       margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 90%;
-      max-width: 420px;
-    }
-    #musicControls > div:first-child {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    #trackList {
-      margin-top: 20px;
-      width: 100%;
-      text-align: left;
-    }
-    #trackList ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    #trackList li {
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    #trackList li:hover {
-      background-color: #ff4c99;
-    }
-    #trackList li.active {
-      background-color: #ff66b2;
-      font-weight: bold;
     }
     button {
       background: #ff66b2;
@@ -92,118 +59,33 @@
     button:hover {
       background: #ff4c99;
     }
-    #progressContainer {
-      width: 100%;
-      background-color: #333;
-      border-radius: 12px;
-      margin-top: 15px;
-      height: 12px;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    #progressBar {
-      height: 100%;
-      width: 0%;
-      background: #ff66b2;
-      border-radius: 12px;
-      transition: width 0.1s linear;
-    }
-    #volumeControl {
-      margin-top: 15px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-    }
-    #volumeControl input[type="range"] {
-      flex-grow: 1;
-      -webkit-appearance: none;
-      background: #333;
-      height: 8px;
-      border-radius: 5px;
-      cursor: pointer;
+    audio {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 420px;
       outline: none;
+      border-radius: 12px;
+      background-color: #000;
+      border: 2px solid #ff66b2;
+      padding: 8px;
     }
-    #volumeControl input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      background: #ff66b2;
-      border-radius: 50%;
-      cursor: pointer;
-      border: none;
-      margin-top: -6px;
+    audio::-webkit-media-controls-panel {
+      background-color: #000;
+      color: #fff;
+      border-radius: 12px;
     }
-    #volumeControl input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      background: #ff66b2;
-      border-radius: 50%;
-      cursor: pointer;
-      border: none;
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-mute-button,
+    audio::-webkit-media-controls-timeline,
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display,
+    audio::-webkit-media-controls-volume-slider {
+      filter: hue-rotate(300deg) saturate(1.5) brightness(1.2);
     }
-    #extraControls {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    /* Мобильная оптимизация */
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-      }
-      #countdown {
-        font-size: 2rem;
-        padding: 20px 25px;
-        margin-bottom: 30px;
-      }
-      #musicControls {
-        max-width: 100%;
-        padding: 0 15px;
-      }
-      #musicControls > div:first-child {
-        flex-direction: column;
-        gap: 12px;
-      }
-      button {
-        font-size: 1.1rem;
-        padding: 14px 0;
-        width: 100%;
-        max-width: 300px;
-        border-radius: 12px;
-      }
-      #extraControls {
-        flex-direction: column;
-        gap: 12px;
-      }
-      #volumeControl {
-        flex-direction: column;
-        gap: 6px;
-      }
-      #volumeControl label {
-        font-size: 1.4rem;
-      }
-      #volumeControl input[type="range"] {
-        width: 100%;
-      }
-      #progressContainer {
-        height: 14px;
-        border-radius: 10px;
-      }
-      #progressBar {
-        border-radius: 10px;
-      }
-      #trackList ul {
-        font-size: 1rem;
-      }
-      #trackList li {
-        padding: 10px 16px;
-      }
+      h1 { font-size: 2rem; }
+      #countdown { font-size: 2rem; padding: 20px 30px; }
+      button { padding: 10px 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -212,33 +94,13 @@
   <div id="countdown">Загрузка...</div>
 
   <div id="musicControls">
-    <div>
-      <button id="playPauseBtn">Пауза</button>
-      <button id="nextBtn">Следующий трек</button>
-    </div>
-
-    <div id="progressContainer" title="Перемотать">
-      <div id="progressBar"></div>
-    </div>
-
-    <div id="volumeControl" title="Громкость">
-      <label for="volumeRange">🔊</label>
-      <input type="range" id="volumeRange" min="0" max="1" step="0.01" value="1" />
-    </div>
-
-    <div id="extraControls">
-      <button id="loopBtn" title="Зациклить трек">Цикл: выкл</button>
-      <button id="shuffleBtn" title="Случайный порядок">Рандом: выкл</button>
-    </div>
-
-    <div id="trackList">
-      <ul></ul>
-    </div>
-
-    <audio id="audioPlayer" preload="auto">
-      Ваш браузер не поддерживает аудио.
-    </audio>
+    <button onclick="nextTrack()">Следующий трек</button>
   </div>
+
+  <audio id="audioPlayer" controls autoplay loop>
+    <source src="track1.mp3" type="audio/mpeg" />
+    Ваш браузер не поддерживает аудио.
+  </audio>
 
   <script>
     const countdown = document.getElementById("countdown");
@@ -250,7 +112,6 @@
 
       if (distance < 0) {
         countdown.innerHTML = "Событие наступило!";
-        player.pause();
         return;
       }
 
@@ -259,84 +120,26 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+      countdown.innerHTML = ${days}д ${hours}ч ${minutes}м ${seconds}с;
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    const tracks = [
-      { title: "Трек 1", src: "track1.mp3" },
-      { title: "Трек 2", src: "track2.mp3" },
-      // Можно добавить сюда больше треков
-    ];
+    const tracks = ["track1.mp3", "track2.mp3"];
     let current = 0;
-    let shuffle = false;
-    let shuffledOrder = [];
-    let loop = false;
-
     const player = document.getElementById("audioPlayer");
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const progressBar = document.getElementById("progressBar");
-    const progressContainer = document.getElementById("progressContainer");
-    const trackListUl = document.querySelector("#trackList ul");
-    const volumeRange = document.getElementById("volumeRange");
-    const loopBtn = document.getElementById("loopBtn");
-    const shuffleBtn = document.getElementById("shuffleBtn");
-
-    function loadTrack(index) {
-      current = index;
-      player.src = tracks[current].src;
-      player.load();
-      player.play();
-      updateTrackList();
-      playPauseBtn.textContent = "Пауза";
-      updateLoopButton();
-      updateShuffleButton();
-    }
-
-    function updateTrackList() {
-      trackListUl.innerHTML = "";
-      tracks.forEach((track, i) => {
-        const li = document.createElement("li");
-        li.textContent = track.title;
-        if (i === current) {
-          li.classList.add("active");
-        }
-        li.onclick = () => {
-          shuffle = false; // выключаем рандом при ручном выборе
-          loadTrack(i);
-        };
-        trackListUl.appendChild(li);
-      });
-    }
-
-    function togglePlayPause() {
-      if (player.paused) {
-        player.play();
-        playPauseBtn.textContent = "Пауза";
-      } else {
-        player.pause();
-        playPauseBtn.textContent = "Играть";
-      }
-    }
 
     function nextTrack() {
-      if (shuffle) {
-        if (shuffledOrder.length === 0) {
-          generateShuffledOrder();
-        }
-        current = shuffledOrder.shift();
-        loadTrack(current);
-      } else {
-        current = (current + 1) % tracks.length;
-        loadTrack(current);
-      }
+      current = (current + 1) % tracks.length;
+      player.src = tracks[current];
+      player.play();
     }
 
-    function generateShuffledOrder() {
-      shuffledOrder = tracks.map((_, i) => i).filter(i => i !== current);
-      for (let i = shuffledOrder.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledOrder[i], shuffledOrder[j]] = [shuffledOrder[j], shuffledOrder
+    window.onload = () => {
+      player.src = tracks[current];
+      player.play();
+    };
+  </script>
+</body>
+</html>
