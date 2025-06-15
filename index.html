@@ -43,22 +43,6 @@
       0%, 100% { box-shadow: 0 0 15px #ff66b2; }
       50% { box-shadow: 0 0 30px #ff66b2; }
     }
-    #musicControls {
-      margin-top: 10px;
-    }
-    button {
-      background: #ff66b2;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #ff4c99;
-    }
     audio {
       margin-top: 20px;
       width: 90%;
@@ -85,17 +69,12 @@
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
       #countdown { font-size: 2rem; padding: 20px 30px; }
-      button { padding: 10px 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
   <h1>До 16 июня 2025 года осталось:</h1>
   <div id="countdown">Загрузка...</div>
-
-  <div id="musicControls">
-    <button onclick="nextTrack()">Следующий трек</button>
-  </div>
 
   <audio id="audioPlayer" controls autoplay loop>
     <source src="track1.mp3" type="audio/mpeg" />
@@ -120,26 +99,7 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdown.innerHTML = ${days}д ${hours}ч ${minutes}м ${seconds}с;
+      countdown.innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
     }
 
     setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    const tracks = ["track1.mp3", "track2.mp3"];
-    let current = 0;
-    const player = document.getElementById("audioPlayer");
-
-    function nextTrack() {
-      current = (current + 1) % tracks.length;
-      player.src = tracks[current];
-      player.play();
-    }
-
-    window.onload = () => {
-      player.src = tracks[current];
-      player.play();
-    };
-  </script>
-</body>
-</html>
